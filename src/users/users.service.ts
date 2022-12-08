@@ -12,9 +12,7 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<UserEntity[]> {
-    return await this.userRepository.find({
-      select: ['id', 'uuid', 'email', 'name', 'phone'],
-    });
+    return await this.userRepository.find();
   }
 
   async create(data: CreateUserDTO): Promise<UserEntity> {
