@@ -1,8 +1,7 @@
 import { Body, Controller, Get, OnModuleInit, Post } from '@nestjs/common';
 import { Client, ClientKafka, Transport } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UserEntity } from './entities/users.entity';
+import { User } from './interfaces/users.interface';
 
 @Controller('users')
 export class UsersController implements OnModuleInit {
@@ -32,12 +31,12 @@ export class UsersController implements OnModuleInit {
   }
 
   @Get()
-  index(): Observable<UserEntity[]> {
+  index(): Observable<User[]> {
     return this.cliente.send('find-all-user', {});
   }
 
   @Post()
-  create(@Body() data: CreateUserDTO): Observable<UserEntity> {
+  create(@Body() data: any): Observable<User> {
     return this.cliente.send('create-user', data);
   }
 }
